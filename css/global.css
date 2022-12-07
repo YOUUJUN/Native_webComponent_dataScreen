@@ -8,5 +8,11 @@ html,body{
 
 .root{
     padding:2.5rem 3rem;
+}
 
+.time-wrap{
+    display: flex;
+    width: 22rem;
+    flex-direction: row;
+    align-items: center;
 }

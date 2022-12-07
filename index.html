@@ -137,16 +137,19 @@
                         <div class="chart-card-top">
                             <h2 class="chart-card-top-left">转化率</h2>
                             <div class="chart-card-top-right layui-form">
-                                <input type="checkbox" name="zzz" lay-skin="switch" lay-text="开启|关闭">
+                                <input type="checkbox" name="zzz" lay-skin="switch" lay-text="按月|按年">
 <!--                                <input type="text" class="layui-input" id="time_conversion_rate" style="width:19rem" placeholder="开始时间   至  结束时间">-->
-                                <div class="layui-inline" id="time_conversion_rate">
-                                    <div class="layui-input-inline">
-                                        <input type="text" id="startDate" class="layui-input" placeholder="开始日期">
-                                    </div>
-                                    <div class="layui-form-mid">-</div>
-                                    <div class="layui-input-inline">
-                                        <input type="text" id="endDate" class="layui-input" placeholder="结束日期">
-                                    </div>
+                                <div class="time-wrap" id="time_conversion_rate">
+                                    <input type="text" autocomplete="off" id="startTime" class="layui-input" placeholder="开始日期">
+                                    <span style="margin:0 .5rem">至</span>
+                                    <input type="text" autocomplete="off" id="endTime" class="layui-input" placeholder="结束日期">
+<!--                                    <div class="layui-input-inline">-->
+
+<!--                                    </div>-->
+<!--                                    <div class="layui-form-mid">-</div>-->
+<!--                                    <div class="layui-input-inline">-->
+
+<!--                                    </div>-->
                                 </div>
                             </div>
                         </div>

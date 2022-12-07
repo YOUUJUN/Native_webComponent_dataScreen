@@ -21,8 +21,22 @@
 }
 
 .chart-card-top-right{
-    width:27rem;
+    width:30rem;
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: space-between;
+}
+
+.chart-card-top-right .layui-form-switch{
+    border-color: #5FB878 !important;
+    background-color: #5FB878 !important;
+
+}
+
+.chart-card-top-right .layui-form-switch em{
+    color: #fff !important;
+}
+
+.chart-card-top-right .layui-form-switch i{
+    background-color: #fff !important;
 }
