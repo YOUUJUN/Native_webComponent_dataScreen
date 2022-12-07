@@ -5,13 +5,14 @@
 .stats-card{
     display: flex;
     flex-direction: column;
-    padding: 1rem 1.5rem;
+    padding: 1.5rem 2.3rem;
 }
 
 .stats-card-top{
     display: flex;
     justify-content: space-between;
     padding-bottom: 1.4rem;
+    margin-bottom: 1rem;
     border-bottom: .1rem solid #aaaaaa;
 }
 
@@ -19,6 +20,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
 }
 
 .stats-card-top-right{
@@ -30,5 +32,25 @@
 .stats-card-bottom{
     display: flex;
     justify-content: space-between;
-    padding: 1rem 0;
 }
+
+/*---tag---*/
+.tag{
+    background: #7f7f7f;
+    color:#fff;
+    padding: .4rem .8rem;
+    border-radius: .4rem;
+}
+
+.stats-card-top-left > .num{
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: .5rem 0;
+}
+
+.stats-card-top-left > .label{
+    color:#31b7f2;
+    font-size: 1.5rem;
+}
+
+

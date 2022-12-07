@@ -10,7 +10,7 @@
     <META HTTP-EQUIV="expires" CONTENT="0">
 
     <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="lib/layui/css/layui.css">
     <link rel="stylesheet" href="css/card.css">
     <link rel="stylesheet" href="css/states_card.css">
     <link rel="stylesheet" href="css/chart_card.css">
@@ -38,6 +38,8 @@
                             <div class="stats-card-top-left">
                                 
                                 <span class="tag">试住</span>
+                                <span class="num">1598</span>
+                                <span class="label">老人总数</span>
 
                             </div>
 
@@ -134,13 +136,23 @@
                     <section class="card chart-card">
                         <div class="chart-card-top">
                             <h2 class="chart-card-top-left">转化率</h2>
-                            <div class="chart-card-top-right">
-
+                            <div class="chart-card-top-right layui-form">
+                                <input type="checkbox" name="zzz" lay-skin="switch" lay-text="开启|关闭">
+<!--                                <input type="text" class="layui-input" id="time_conversion_rate" style="width:19rem" placeholder="开始时间   至  结束时间">-->
+                                <div class="layui-inline" id="time_conversion_rate">
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="startDate" class="layui-input" placeholder="开始日期">
+                                    </div>
+                                    <div class="layui-form-mid">-</div>
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="endDate" class="layui-input" placeholder="结束日期">
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="chart-card-bottom">
-
+                            <line-chart></line-chart>
                         </div>
                     </section>
 
@@ -318,7 +330,34 @@
     </article>
 
 
-    <script src="layui/layui.js"></script>
+    <script src="lib/layui/layui.js"></script>
+    <script src="lib/axios.min.js"></script>
+    <script src="lib/echarts.min.js"></script>
+
+    <script src="components/line_chart.js"></script>
+
+    <script src="js/time_range_search.js"></script>
+
+    <script>
+        layui.use('form', () =>{
+            const form = layui.form;
+
+            //各种基于事件的操作，下面会有进一步介绍
+        });
+
+        genTimeRange('#time_conversion_rate', 'year', () => {
+
+        })
+    </script>
+
 
 </body>
 </html>
+
+
+
+
+
+
+
+

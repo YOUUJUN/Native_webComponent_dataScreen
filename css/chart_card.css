@@ -21,6 +21,8 @@
 }
 
 .chart-card-top-right{
+    width:27rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
