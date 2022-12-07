@@ -1,27 +1,23 @@
 class LineChart extends HTMLParagraphElement{
-
+    hello = 'hello'
+    shell = null
+    chart = null
     constructor() {
         super();
         const data = []
+        this.shell = this.render()
+        const style = this.css()
+        this.setupShadow(this.shell, style)
+        this.chart = this.setupChart(this.shell)
+    }
 
-        const shadow = this.attachShadow({mode : 'open'})
+    render(){
         const shell = document.createElement('div')
         shell.setAttribute('class', 'chart')
+        return shell
+    }
 
-        const style = document.createElement('style')
-
-        style.textContent = `
-            .chart{
-                height:50rem;
-                width:100%;
-                color:red;
-            }
-        `
-
-        const span = document.createElement('span')
-        span.setAttribute('class', 'chart')
-        span.innerText = 'hello'
-
+    setupChart(shell){
         const option = {
             xAxis: {
                 type: 'category',
@@ -38,12 +34,29 @@ class LineChart extends HTMLParagraphElement{
                 }
             ]
         };
-
-
-        shadow.appendChild(style)
-        shadow.appendChild(shell)
         const chart = echarts.init(shell)
         chart.setOption(option)
+
+        return chart
+    }
+
+    setupShadow(shell, style){
+        const shadow = this.attachShadow({mode : 'open'})
+        shadow.appendChild(style)
+        shadow.appendChild(shell)
+    }
+
+    css(){
+        const style = document.createElement('style')
+
+        style.textContent = `
+            .chart{
+                height:50rem;
+                width:100%;
+                color:red;
+            }
+        `
+        return style
     }
 
 }

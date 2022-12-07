@@ -6,6 +6,10 @@ html,body{
     background: #f2f2f2;
 }
 
+.hide{
+    display: none !important;
+}
+
 .root{
     padding:2.5rem 3rem;
 }

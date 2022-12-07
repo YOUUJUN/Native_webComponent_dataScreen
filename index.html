@@ -137,25 +137,22 @@
                         <div class="chart-card-top">
                             <h2 class="chart-card-top-left">转化率</h2>
                             <div class="chart-card-top-right layui-form">
-                                <input type="checkbox" name="zzz" lay-skin="switch" lay-text="按月|按年">
-<!--                                <input type="text" class="layui-input" id="time_conversion_rate" style="width:19rem" placeholder="开始时间   至  结束时间">-->
-                                <div class="time-wrap" id="time_conversion_rate">
-                                    <input type="text" autocomplete="off" id="startTime" class="layui-input" placeholder="开始日期">
+                                <input type="checkbox" name="zzz" lay-skin="switch" lay-filter="time_conversion_rate" lay-text="按月|按年" checked>
+                                <div class="time-wrap" id="time_conversion_rate_month">
+                                    <input type="text" autocomplete="off" class="layui-input startTime" placeholder="开始日期">
                                     <span style="margin:0 .5rem">至</span>
-                                    <input type="text" autocomplete="off" id="endTime" class="layui-input" placeholder="结束日期">
-<!--                                    <div class="layui-input-inline">-->
-
-<!--                                    </div>-->
-<!--                                    <div class="layui-form-mid">-</div>-->
-<!--                                    <div class="layui-input-inline">-->
-
-<!--                                    </div>-->
+                                    <input type="text" autocomplete="off" class="layui-input endTime" placeholder="结束日期">
+                                </div>
+                                <div class="time-wrap hide" id="time_conversion_rate_year">
+                                    <input type="text" autocomplete="off" class="layui-input startTime" placeholder="开始日期">
+                                    <span style="margin:0 .5rem">至</span>
+                                    <input type="text" autocomplete="off" class="layui-input endTime" placeholder="结束日期">
                                 </div>
                             </div>
                         </div>
 
                         <div class="chart-card-bottom">
-                            <line-chart></line-chart>
+                            <line-chart id="chart_conversion_rate"></line-chart>
                         </div>
                     </section>
 
@@ -342,15 +339,39 @@
     <script src="js/time_range_search.js"></script>
 
     <script>
+        genTimeRange('time_conversion_rate_month', 'month', () => {
+            const chart = document.getElementById('chart_conversion_rate')
+            console.log('chart', chart.chart)
+            chart.chart.setOption({
+                series: [
+                    {
+                        data: [1, 1, 1, 1, 1290, 1330, 1],
+                        type: 'line',
+                        smooth: true
+                    }
+                ]
+            })
+        })
+        genTimeRange('time_conversion_rate_year', 'year', () => {
+
+        })
+
         layui.use('form', () =>{
             const form = layui.form;
 
-            //各种基于事件的操作，下面会有进一步介绍
+            form.on('switch(time_conversion_rate)', function(data){
+                if(data.elem.checked){
+                    document.getElementById('time_conversion_rate_month').classList.remove('hide')
+                    document.getElementById('time_conversion_rate_year').classList.add('hide')
+                }else{
+                    document.getElementById('time_conversion_rate_month').classList.add('hide')
+                    document.getElementById('time_conversion_rate_year').classList.remove('hide')
+                }
+            });
+
         });
 
-        genTimeRange('#time_conversion_rate', 'year', () => {
 
-        })
     </script>
 
 
