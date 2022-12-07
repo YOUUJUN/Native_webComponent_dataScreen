@@ -1,0 +1,26 @@
+.pie-card-wrap{
+    margin-bottom: 2.4rem;
+}
+
+.pie-card{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+}
+
+.pie-card-top{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: .1rem solid #aaaaaa;
+    margin-bottom: 1rem;
+}
+
+.pie-card-top-left{
+    margin-left: .4rem;
+}
+
+.pie-card-top-right{
+    display: flex;
+    align-items: center;
+}
