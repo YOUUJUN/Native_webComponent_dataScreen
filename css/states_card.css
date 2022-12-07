@@ -1,0 +1,34 @@
+.stats-card-wrap{
+    margin-bottom: 2.4rem;
+}
+
+.stats-card{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+}
+
+.stats-card-top{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1.4rem;
+    border-bottom: .1rem solid #aaaaaa;
+}
+
+.stats-card-top-left{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.stats-card-top-right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stats-card-bottom{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
