@@ -17,6 +17,12 @@ html,body{
 .time-wrap{
     display: flex;
     width: 22rem;
+    margin-left: 1.8rem;
     flex-direction: row;
     align-items: center;
 }
+
+.time-wrap .layui-input{
+    height: 3.8rem;
+}
+

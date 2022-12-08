@@ -35,10 +35,11 @@
 }
 
 /*---tag---*/
-.tag{
+.tag {
     background: #7f7f7f;
-    color:#fff;
-    padding: .4rem .8rem;
+    font-size: 1.4rem;
+    color: #fff;
+    padding: .4rem 1.2rem;
     border-radius: .4rem;
 }
 
@@ -50,7 +51,7 @@
 
 .stats-card-top-left > .label{
     color:#31b7f2;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 

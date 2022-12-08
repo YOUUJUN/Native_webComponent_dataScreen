@@ -9,12 +9,14 @@
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
     <META HTTP-EQUIV="expires" CONTENT="0">
 
-    <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="lib/layui/css/layui.css">
     <link rel="stylesheet" href="css/card.css">
     <link rel="stylesheet" href="css/states_card.css">
     <link rel="stylesheet" href="css/chart_card.css">
     <link rel="stylesheet" href="css/pie_card.css">
+    <link rel="stylesheet" href="css/table_card.css">
+    <link rel="stylesheet" href="css/map_card.css">
+    <link rel="stylesheet" href="css/global.css">
 
     <title>机构-{{object.company.name}}-营销管理数据看板</title>
 </head>
@@ -152,7 +154,7 @@
                         </div>
 
                         <div class="chart-card-bottom">
-                            <line-chart id="chart_conversion_rate" type="simple"></line-chart>
+                            <line-chart id="chart_conversion_rate" type="simple" style="display: inline-flex;width: 100%;"></line-chart>
                         </div>
                     </section>
 
@@ -179,7 +181,7 @@
                         </div>
 
                         <div class="chart-card-bottom">
-                            <line-chart id="chart_elder_sign"></line-chart>
+                            <line-chart id="chart_elder_sign" style="display: inline-flex;width: 100%;"></line-chart>
                         </div>
                     </section>
 
@@ -258,14 +260,24 @@
 
                     <section class="card chart-card">
                         <div class="chart-card-top">
-                            <h2 class="chart-card-top-left">转化率</h2>
-                            <div class="chart-card-top-right">
-
+                            <h2 class="chart-card-top-left">了解途径</h2>
+                            <div class="chart-card-top-right layui-form">
+                                <input type="checkbox" lay-skin="switch" lay-filter="time_know_pathway" lay-text="按月|按年" checked>
+                                <div class="time-wrap" id="time_know_pathway_month">
+                                    <input type="text" autocomplete="off" class="layui-input startTime" placeholder="开始日期">
+                                    <span style="margin:0 .5rem">至</span>
+                                    <input type="text" autocomplete="off" class="layui-input endTime" placeholder="结束日期">
+                                </div>
+                                <div class="time-wrap hide" id="time_know_pathway_year">
+                                    <input type="text" autocomplete="off" class="layui-input startTime" placeholder="开始日期">
+                                    <span style="margin:0 .5rem">至</span>
+                                    <input type="text" autocomplete="off" class="layui-input endTime" placeholder="结束日期">
+                                </div>
                             </div>
                         </div>
 
                         <div class="chart-card-bottom">
-
+                            <bar-chart id="chart_know_pathway" type="simple" style="display: inline-flex;width: 100%;"></bar-chart>
                         </div>
                     </section>
 
@@ -275,14 +287,15 @@
 
                     <section class="card chart-card">
                         <div class="chart-card-top">
-                            <h2 class="chart-card-top-left">转化率</h2>
+                            <h2 class="chart-card-top-left">客户关注点/客户抗性</h2>
                             <div class="chart-card-top-right">
 
                             </div>
                         </div>
 
                         <div class="chart-card-bottom">
-
+                            <polar-bar-chart id="chart_customer_care" style="display:inline-flex;width:50%;"></polar-bar-chart>
+                            <polar-bar-chart id="chart_customer_care" style="display:inline-flex;width:50%;"></polar-bar-chart>
                         </div>
                     </section>
 
@@ -297,14 +310,14 @@
 
                     <section class="card chart-card">
                         <div class="chart-card-top">
-                            <h2 class="chart-card-top-left">转化率</h2>
+                            <h2 class="chart-card-top-left">老人转化分析模型</h2>
                             <div class="chart-card-top-right">
 
                             </div>
                         </div>
 
                         <div class="chart-card-bottom">
-
+                            <funnel-chart id="chart_transform_analyze" style="display:inline-flex;width:100%;"></funnel-chart>
                         </div>
                     </section>
 
@@ -314,7 +327,27 @@
 
                     <section class="card chart-card">
                         <div class="chart-card-top">
-                            <h2 class="chart-card-top-left">转化率</h2>
+                            <h2 class="chart-card-top-left">客户职业</h2>
+                            <div class="chart-card-top-right">
+
+                            </div>
+                        </div>
+
+                        <div class="chart-card-bottom">
+                            <bar-chart id="chart_custom_career" type="simple" style="display: inline-flex;width: 100%;"></bar-chart>
+                        </div>
+                    </section>
+
+                </div>
+
+            </section>
+
+            <section class="chart-card-wrap layui-row">
+
+                <div class="layui-col-xs12 layui-col-sm12 layui-col-md6">
+                    <section class="card chart-card">
+                        <div class="chart-card-top">
+                            <h2 class="chart-card-top-left">来访/回访</h2>
                             <div class="chart-card-top-right">
 
                             </div>
@@ -324,11 +357,49 @@
 
                         </div>
                     </section>
+                </div>
+
+                <div class="layui-col-xs12 layui-col-sm12 layui-col-md6">
+                    <section class="card map-card">
+                        <div class="map-card-top">
+                            <h2 class="map-card-top-left">老人地址分布</h2>
+                            <div class="map-card-top-right">
+
+                            </div>
+                        </div>
+
+                        <div class="map-card-bottom">
+                            <map-card></map-card>
+                        </div>
+                    </section>
+                </div>
+
+            </section>
+
+
+            <section class="table-card-wrap layui-row">
+
+                <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+
+                    <section class="card table-card">
+                        <div class="table-card-top">
+
+                            <input class="layui-input" name="id" id="tableReload" autocomplete="off" placeholder="输入老人姓名查找" style="width:180px;margin-right: 10px;">
+                            <button id="table_search" class="layui-btn" data-type="reload">搜索</button>
+
+                        </div>
+
+                        <div class="table-card-bottom">
+
+                            <table class="layui-hide" id="LAY_table_user" lay-filter="user"></table>
+
+                        </div>
+                    </section>
 
                 </div>
 
-
             </section>
+
 
         </main>
 
@@ -343,13 +414,22 @@
     <script src="lib/layui/layui.js"></script>
     <script src="lib/axios.min.js"></script>
     <script src="lib/echarts.min.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="https://api.map.baidu.com/api?v=3.0&ak=ph1UtdQV0g7i4lOaq5qsZd2cEpOGbH8g"></script>
 
     <script src="components/line_chart.js"></script>
     <script src="components/pie_chart.js"></script>
+    <script src="components/bar_chart.js"></script>
+    <script src="components/polar_bar_chart.js"></script>
+    <script src="components/funnel_chart.js"></script>
+    <script src="components/map_card.js"></script>
 
     <script src="js/time_range_search.js"></script>
+    <script src="js/table_render.js"></script>
 
     <script>
+        this.flexible()
+
         //渲染转化率折线图
         const draw_chart_conversion_rate = (startTime, endTime) => {
             const chart = document.getElementById('chart_conversion_rate')
@@ -395,7 +475,6 @@
             });
 
         });
-
 
     </script>
 

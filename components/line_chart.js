@@ -1,4 +1,4 @@
-class LineChart extends HTMLParagraphElement{
+class LineChart extends HTMLElement{
     shell = null
     chart = null
     constructor() {
@@ -18,6 +18,11 @@ class LineChart extends HTMLParagraphElement{
     setupChart(shell, option){
         const chart = echarts.init(shell)
         chart.setOption(option)
+        window.addEventListener("resize", function () {
+            setTimeout(() => {
+                chart.resize();
+            }, 100)
+        })
         this.chart = chart
         return chart
     }
@@ -114,4 +119,4 @@ class LineChart extends HTMLParagraphElement{
 
 }
 
-customElements.define('line-chart', LineChart, { extends: 'p' })
+customElements.define('line-chart', LineChart)

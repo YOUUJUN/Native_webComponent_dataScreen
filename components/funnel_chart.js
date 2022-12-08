@@ -1,4 +1,4 @@
-class PieChart extends HTMLElement{
+class FunnelChart extends HTMLElement{
     shell = null
     chart = null
     constructor() {
@@ -33,52 +33,57 @@ class PieChart extends HTMLElement{
         const option = {
             tooltip: {
                 trigger: 'item',
-                formatter: (params) =>{
-                    let tips = `${params.name}<br />${params.marker} 占比：${params.percent}%<br />${params.marker} 数量：${params.value}`
-                    return tips
-
+                formatter: (params) => {
+                    return `${params.name}<br />${params.marker} 数量：${params.value}`
                 }
             },
-            legend: {
-                left: 'left',
-                top: '4%',
-                orient : 'vertical',
-            },
+            // legend: {
+            //   data: ['Show', 'Click', 'Visit', 'Inquiry', 'Order']
+            // },
             series: [
                 {
-                    type: 'pie',
-                    radius: ['50%', '90%'],
-                    center : ['67%', '50%'],
-                    avoidLabelOverlap: false,
-                    itemStyle: {
-                        borderRadius: 5,
-                        borderColor: '#fff',
-                        borderWidth: 2
-                    },
+                    name: 'Funnel',
+                    type: 'funnel',
+                    left: '10%',
+                    top: 60,
+                    bottom: 60,
+                    width: '80%',
+                    min: 0,
+                    max: 100,
+                    minSize: '0%',
+                    maxSize: '100%',
+                    sort: 'descending',
+                    gap: 2,
                     label: {
-                        show: false,
-                        position: 'center'
+                        show: true,
+                        position: 'inside'
+                    },
+                    labelLine: {
+                        length: 10,
+                        lineStyle: {
+                            width: 1,
+                            type: 'solid'
+                        }
+                    },
+                    itemStyle: {
+                        borderColor: '#fff',
+                        borderWidth: 1
                     },
                     emphasis: {
                         label: {
-                            show: false,
-                            fontSize: '15',
-                            fontWeight: 'bold'
+                            fontSize: 20
                         }
                     },
-                    labelLine: {
-                        show: false
-                    },
                     data: [
-                        { value: 1048, name: 'Search Engine' },
-                        { value: 735, name: 'Direct' },
-                        { value: 580, name: 'Email' },
-                        { value: 484, name: 'Union Ads' },
-                        { value: 300, name: 'Video Ads' }
+                        { value: 60, name: 'Visit' },
+                        { value: 40, name: 'Inquiry' },
+                        { value: 20, name: 'Order' },
+                        { value: 80, name: 'Click' },
+                        { value: 100, name: 'Show' }
                     ]
                 }
             ]
-        }
+        };
 
         this.setupChart(this.shell, option)
     }
@@ -95,7 +100,7 @@ class PieChart extends HTMLElement{
 
         style.textContent = `
             .chart{
-                height:20rem;
+                height:50rem;
                 width:100%;
                 color:red;
             }
@@ -105,4 +110,4 @@ class PieChart extends HTMLElement{
 
 }
 
-customElements.define('pie-chart', PieChart)
+customElements.define('funnel-chart', FunnelChart)

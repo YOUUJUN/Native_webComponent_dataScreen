@@ -1,29 +1,20 @@
-.pie-card-wrap{
-    margin-bottom: 2.4rem;
-}
-
-.pie-card{
+.map-card{
     display: flex;
     flex-direction: column;
     padding: 1rem 1.5rem;
 }
 
-.pie-card-top{
+.map-card-top {
     display: flex;
     justify-content: space-between;
-    padding: 1rem 0;
-    border-bottom: .1rem solid #aaaaaa;
     margin-bottom: 1rem;
+    height: 6rem;
+    align-items: center;
 }
 
-.pie-card-top-left{
-    font-size: 1.7rem;
+.map-card-top-left{
+    font-size: 1.9rem;
     font-family: 'Arial Negreta', 'Arial Normal', 'Arial';
     font-weight: 700;
     margin-left: .4rem;
-}
-
-.pie-card-top-right{
-    display: flex;
-    align-items: center;
 }
