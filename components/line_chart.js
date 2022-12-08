@@ -1,5 +1,4 @@
 class LineChart extends HTMLParagraphElement{
-    hello = 'hello'
     shell = null
     chart = null
     constructor() {
@@ -8,7 +7,6 @@ class LineChart extends HTMLParagraphElement{
         this.shell = this.render()
         const style = this.css()
         this.setupShadow(this.shell, style)
-        this.chart = this.setupChart(this.shell)
     }
 
     render(){
@@ -17,8 +15,18 @@ class LineChart extends HTMLParagraphElement{
         return shell
     }
 
-    setupChart(shell){
+    setupChart(shell, option){
+        const chart = echarts.init(shell)
+        chart.setOption(option)
+        this.chart = chart
+        return chart
+    }
+
+    drawSimpleLine(){
         const option = {
+            tooltip: {
+                trigger: 'axis'
+            },
             xAxis: {
                 type: 'category',
                 data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -33,12 +41,57 @@ class LineChart extends HTMLParagraphElement{
                     smooth: true
                 }
             ]
-        };
-        const chart = echarts.init(shell)
-        chart.setOption(option)
+        }
 
-        return chart
+        this.setupChart(this.shell, option)
     }
+
+    drawMultipleLine() {
+        const option = {
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                left: 'left',
+                top: '4%',
+                data: ['客户咨询量', '客户签约量'],
+                orient : 'vertical',
+            },
+            grid: {
+                left: '120',
+                right: '4%',
+                bottom: '3%',
+                top : '5%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    name: '客户咨询量',
+                    type: 'line',
+                    stack: 'Total',
+                    data: [120, 132, 101, 134, 90, 230, 210]
+                },
+                {
+                    name: '客户签约量',
+                    type: 'line',
+                    stack: 'Total',
+                    data: [220, 182, 191, 234, 290, 330, 310]
+                },
+
+            ]
+        };
+
+        this.setupChart(this.shell, option)
+    }
+
 
     setupShadow(shell, style){
         const shadow = this.attachShadow({mode : 'open'})

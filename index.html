@@ -137,7 +137,7 @@
                         <div class="chart-card-top">
                             <h2 class="chart-card-top-left">转化率</h2>
                             <div class="chart-card-top-right layui-form">
-                                <input type="checkbox" name="zzz" lay-skin="switch" lay-filter="time_conversion_rate" lay-text="按月|按年" checked>
+                                <input type="checkbox" lay-skin="switch" lay-filter="time_conversion_rate" lay-text="按月|按年" checked>
                                 <div class="time-wrap" id="time_conversion_rate_month">
                                     <input type="text" autocomplete="off" class="layui-input startTime" placeholder="开始日期">
                                     <span style="margin:0 .5rem">至</span>
@@ -152,7 +152,7 @@
                         </div>
 
                         <div class="chart-card-bottom">
-                            <line-chart id="chart_conversion_rate"></line-chart>
+                            <line-chart id="chart_conversion_rate" type="simple"></line-chart>
                         </div>
                     </section>
 
@@ -162,14 +162,24 @@
 
                     <section class="card chart-card">
                         <div class="chart-card-top">
-                            <h2 class="chart-card-top-left">转化率</h2>
-                            <div class="chart-card-top-right">
-
+                            <h2 class="chart-card-top-left">老人签约量/客户咨询量</h2>
+                            <div class="chart-card-top-right layui-form">
+                                <input type="checkbox" lay-skin="switch" lay-filter="time_elder_sign" lay-text="按月|按年" checked>
+                                <div class="time-wrap" id="time_elder_sign_month">
+                                    <input type="text" autocomplete="off" class="layui-input startTime" placeholder="开始日期">
+                                    <span style="margin:0 .5rem">至</span>
+                                    <input type="text" autocomplete="off" class="layui-input endTime" placeholder="结束日期">
+                                </div>
+                                <div class="time-wrap hide" id="time_elder_sign_year">
+                                    <input type="text" autocomplete="off" class="layui-input startTime" placeholder="开始日期">
+                                    <span style="margin:0 .5rem">至</span>
+                                    <input type="text" autocomplete="off" class="layui-input endTime" placeholder="结束日期">
+                                </div>
                             </div>
                         </div>
 
                         <div class="chart-card-bottom">
-
+                            <line-chart id="chart_elder_sign"></line-chart>
                         </div>
                     </section>
 
@@ -190,7 +200,7 @@
                         </div>
 
                         <div class="pie-card-bottom">
-
+                            <pie-chart></pie-chart>
                         </div>
                     </section>
                 </div>
@@ -335,24 +345,39 @@
     <script src="lib/echarts.min.js"></script>
 
     <script src="components/line_chart.js"></script>
+    <script src="components/pie_chart.js"></script>
 
     <script src="js/time_range_search.js"></script>
 
     <script>
-        genTimeRange('time_conversion_rate_month', 'month', () => {
+        //渲染转化率折线图
+        const draw_chart_conversion_rate = (startTime, endTime) => {
             const chart = document.getElementById('chart_conversion_rate')
             console.log('chart', chart.chart)
-            chart.chart.setOption({
-                series: [
-                    {
-                        data: [1, 1, 1, 1, 1290, 1330, 1],
-                        type: 'line',
-                        smooth: true
-                    }
-                ]
-            })
+            chart.drawSimpleLine()
+        }
+        draw_chart_conversion_rate();
+
+        //渲染老人签约量/客户咨询量 折线图
+        const draw_chart_elder_sign = (startTime, endTime) => {
+            const chart = document.getElementById('chart_elder_sign')
+            console.log('chart', chart.chart)
+            chart.drawMultipleLine()
+        }
+        draw_chart_elder_sign()
+
+
+        genTimeRange('time_conversion_rate_month', 'month', () => {
+            draw_chart_conversion_rate()
         })
         genTimeRange('time_conversion_rate_year', 'year', () => {
+
+        })
+
+        genTimeRange('time_elder_sign_month', 'month', () => {
+            draw_chart_elder_sign()
+        })
+        genTimeRange('time_elder_sign_year', 'year', () => {
 
         })
 
