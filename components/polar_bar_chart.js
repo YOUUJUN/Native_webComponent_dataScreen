@@ -9,7 +9,7 @@ class PolarBarChart extends HTMLElement {
         const style = this.css()
         this.setupShadow(this.shell, style)
 
-        this.drawPie()
+        this.drawPolar()
     }
 
     render() {
@@ -33,7 +33,7 @@ class PolarBarChart extends HTMLElement {
         return chart
     }
 
-    drawPie() {
+    drawPolar() {
         const data = [
             {
                 name: '价格',
@@ -143,7 +143,17 @@ class PolarBarChart extends HTMLElement {
             },
             radiusAxis: {},
             polar: {},
-            series,
+            series : [
+                {
+                    type: 'bar',
+                    data: [],
+                    coordinateSystem: 'polar',
+                    stack: 'a',
+                    emphasis: {
+                        focus: 'series'
+                    }
+                }
+            ],
 
             // series: [
             //     {
@@ -183,6 +193,94 @@ class PolarBarChart extends HTMLElement {
         this.setupChart(this.shell, option)
     }
 
+    setData(data){
+        // const data = [
+        //     {
+        //         name: '价格',
+        //         category: [
+        //             {
+        //                 name: '基础月费',
+        //                 value: 1
+        //             },
+        //             {
+        //                 name: '会员卡费',
+        //                 value: 2
+        //             },
+        //             {
+        //                 name: '押金费用',
+        //                 value: 3
+        //             },
+        //             {
+        //                 name: '餐饮费用',
+        //                 value: 4
+        //             },
+        //         ]
+        //     },
+        //     {
+        //         name: '环境',
+        //         category: [
+        //             {
+        //                 name: '活动场地',
+        //                 value: 1
+        //             },
+        //             {
+        //                 name: '居住条件',
+        //                 value: 2
+        //             },
+        //         ]
+        //     },
+        //     {
+        //         name: '服务',
+        //         category: []
+        //     },
+        //     {
+        //         name: '医疗',
+        //         category: []
+        //     },
+        //     {
+        //         name: '交通',
+        //         category: []
+        //     },
+        //     {
+        //         name: '设施',
+        //         category: []
+        //     },
+        //     {
+        //         name: '其他',
+        //         category: []
+        //     },
+        // ]
+
+        const colors = ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc']
+        const series = data.reduce((total, item,index) => {
+            let result = item.category.map((category, categoryIndex) => {
+                let data = new Array(index + 1).fill(0)
+                data[index] = category.value
+                let obj = {
+                    type: 'bar',
+                    name: category.name,
+                    data: data,
+                    itemStyle : {
+                        color : colors[categoryIndex % colors.length]
+                    },
+                    coordinateSystem: 'polar',
+                    stack: 'a',
+                    emphasis: {
+                        focus: 'series'
+                    }
+                }
+
+                return obj
+            })
+
+            total = total.concat(result)
+            return total
+        }, [])
+
+        this.chart.setOption({
+            series,
+        })
+    }
 
     setupShadow(shell, style) {
         const shadow = this.attachShadow({mode: 'open'})

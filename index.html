@@ -250,7 +250,7 @@
                         </div>
 
                         <div class="chart-card-bottom">
-                            <bar-chart id="chart_know_pathway" type="simple" style="display: inline-flex;width: 100%;"></bar-chart>
+                            <bar-chart data-id="know_mode_data" type="simple" style="display: inline-flex;width: 100%;"></bar-chart>
                         </div>
                     </section>
 
@@ -267,8 +267,8 @@
                         </div>
 
                         <div class="chart-card-bottom">
-                            <polar-bar-chart id="chart_customer_care" style="display:inline-flex;width:50%;"></polar-bar-chart>
-                            <polar-bar-chart id="chart_customer_care" style="display:inline-flex;width:50%;"></polar-bar-chart>
+                            <polar-bar-chart data-id="customer_concerns_data" style="display:inline-flex;width:50%;"></polar-bar-chart>
+                            <polar-bar-chart data-id="customer_resistance_data" style="display:inline-flex;width:50%;"></polar-bar-chart>
                         </div>
                     </section>
 
@@ -307,7 +307,7 @@
                         </div>
 
                         <div class="chart-card-bottom">
-                            <bar-chart id="chart_custom_career" type="simple" style="display: inline-flex;width: 100%;"></bar-chart>
+                            <bar-chart data-id="customer_occ_data" type="simple" style="display: inline-flex;width: 100%;"></bar-chart>
                         </div>
                     </section>
 
@@ -353,6 +353,55 @@
 
                         <div class="map-card-bottom">
                             <map-card></map-card>
+                        </div>
+                    </section>
+                </div>
+
+            </section>
+
+            <section class="pie-card-wrap layui-row">
+
+                <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+                    <section class="card pie-card">
+                        <div class="pie-card-top">
+                            <h2 class="pie-card-top-left">居住形式</h2>
+                            <div class="pie-card-top-right">
+
+                            </div>
+                        </div>
+
+                        <div class="pie-card-bottom">
+                            <pie-chart type="rose" data-id="form_data"></pie-chart>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+                    <section class="card pie-card">
+                        <div class="pie-card-top">
+                            <h2 class="pie-card-top-left">护理类型</h2>
+                            <div class="pie-card-top-right">
+
+                            </div>
+                        </div>
+
+                        <div class="pie-card-bottom">
+                            <pie-chart type="rose" data-id="nursing_type_data"></pie-chart>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+                    <section class="card pie-card">
+                        <div class="pie-card-top">
+                            <h2 class="pie-card-top-left">费用接受范围</h2>
+                            <div class="pie-card-top-right">
+
+                            </div>
+                        </div>
+
+                        <div class="pie-card-bottom">
+                            <pie-chart type="rose" data-id="expense_scope_data"></pie-chart>
                         </div>
                     </section>
                 </div>
@@ -423,6 +472,8 @@
     <script src="js/states_render.js" type="module"></script>
     <script src="js/line_cart_render.js" type="module"></script>
     <script src="js/pie_chart_render.js" type="module"></script>
+    <script src="js/bar_chart_render.js" type="module"></script>
+    <script src="js/polar_chart_render.js" type="module"></script>
 
 </body>
 </html>

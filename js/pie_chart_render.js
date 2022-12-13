@@ -13,9 +13,13 @@ const drawChart = () => {
 
             pieCharts.forEach(item => {
                 let chartData = data[item]
-                console.log('chartData', chartData)
                 let chart = document.querySelector(`[data-id=${item}]`)
-                console.log('chart', chart)
+                chart.setData(chartData)
+            })
+
+            roseCharts.forEach(item => {
+                let chartData = data[item]
+                let chart = document.querySelector(`[data-id=${item}]`)
                 chart.setData(chartData)
             })
 

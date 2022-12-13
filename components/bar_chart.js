@@ -8,7 +8,7 @@ class BarChart extends HTMLElement{
         const style = this.css()
         this.setupShadow(this.shell, style)
 
-        this.drawPie()
+        this.drawBar()
     }
 
     render(){
@@ -32,7 +32,7 @@ class BarChart extends HTMLElement{
         return chart
     }
 
-    drawPie(){
+    drawBar(){
         const option = {
             tooltip: {
                 trigger: 'axis',
@@ -42,14 +42,14 @@ class BarChart extends HTMLElement{
             },
             xAxis: {
                 type: 'category',
-                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                data: []
             },
             yAxis: {
                 type: 'value'
             },
             series: [
                 {
-                    data: [120, 200, 150, 80, 70, 110, 130],
+                    data: [],
                     type: 'bar'
                 }
             ]
@@ -58,6 +58,21 @@ class BarChart extends HTMLElement{
         this.setupChart(this.shell, option)
     }
 
+    setData(data){
+        const {x_data, y_data} = data;
+        this.chart.setOption({
+            xAxis: {
+                type: 'category',
+                data: x_data
+            },
+            series : [
+                {
+                    type: 'bar',
+                    data: y_data,
+                }
+            ]
+        })
+    }
 
     setupShadow(shell, style){
         const shadow = this.attachShadow({mode : 'open'})
