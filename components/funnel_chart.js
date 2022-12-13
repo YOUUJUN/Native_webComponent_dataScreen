@@ -20,6 +20,9 @@ class FunnelChart extends HTMLElement{
     setupChart(shell, option){
         const chart = echarts.init(shell)
         chart.setOption(option)
+        setTimeout(() => {
+            chart.resize();
+        }, 100)
         window.addEventListener("resize", function () {
             setTimeout(() => {
                 chart.resize();

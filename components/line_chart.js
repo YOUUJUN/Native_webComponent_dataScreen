@@ -3,10 +3,16 @@ class LineChart extends HTMLElement{
     chart = null
     constructor() {
         super();
+        const type = this.getAttribute('type')
         const data = []
         this.shell = this.render()
         const style = this.css()
         this.setupShadow(this.shell, style)
+        if(type === 'simple'){
+            this.drawSimpleLine()
+        }else if(type === 'multiple'){
+            this.drawMultipleLine()
+        }
     }
 
     render(){
@@ -18,6 +24,9 @@ class LineChart extends HTMLElement{
     setupChart(shell, option){
         const chart = echarts.init(shell)
         chart.setOption(option)
+        setTimeout(() => {
+            chart.resize();
+        }, 100)
         window.addEventListener("resize", function () {
             setTimeout(() => {
                 chart.resize();
@@ -28,20 +37,38 @@ class LineChart extends HTMLElement{
     }
 
     drawSimpleLine(){
+        const date = new Date()
+        let xAxisData = genDateRange(`${date.getFullYear()}-1`, `${date.getFullYear()}-12`, 'month')
+
         const option = {
+            grid: {
+                left: '5%',
+                right: '8%',
+                bottom: '10%',
+                top : '5%',
+                containLabel: true
+            },
             tooltip: {
                 trigger: 'axis'
             },
+            dataZoom: [
+                {
+                    type: 'inside',
+                },
+                {
+                    type : 'slider'
+                }
+            ],
             xAxis: {
                 type: 'category',
-                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                data: xAxisData
             },
             yAxis: {
                 type: 'value'
             },
             series: [
                 {
-                    data: [820, 932, 901, 934, 1290, 1330, 1320],
+                    data: [],
                     type: 'line',
                     smooth: true
                 }
@@ -51,11 +78,44 @@ class LineChart extends HTMLElement{
         this.setupChart(this.shell, option)
     }
 
+    setLineData(startTime, endTime, data, rangeType){
+        let xAxisData = genDateRange(startTime, endTime, rangeType)
+        const series =  Object.entries(data).map(item => {
+            console.log('item', item)
+            return {
+                name : item[0],
+                data : item[1],
+                type: 'line',
+            }
+        })
+
+        console.log('series', series)
+
+        this.chart.setOption({
+            xAxis: {
+                type: 'category',
+                data: xAxisData
+            },
+            series,
+        })
+    }
+
     drawMultipleLine() {
+        const date = new Date()
+        let xAxisData = genDateRange(`${date.getFullYear()}-1`, `${date.getFullYear()}-12`, 'month')
+
         const option = {
             tooltip: {
                 trigger: 'axis'
             },
+            dataZoom: [
+                {
+                    type: 'inside',
+                },
+                {
+                    type : 'slider'
+                }
+            ],
             legend: {
                 left: 'left',
                 top: '4%',
@@ -64,15 +124,15 @@ class LineChart extends HTMLElement{
             },
             grid: {
                 left: '120',
-                right: '4%',
-                bottom: '3%',
+                right: '8%',
+                bottom: '10%',
                 top : '5%',
                 containLabel: true
             },
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
-                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                data: xAxisData,
             },
             yAxis: {
                 type: 'value'
@@ -81,14 +141,12 @@ class LineChart extends HTMLElement{
                 {
                     name: '客户咨询量',
                     type: 'line',
-                    stack: 'Total',
-                    data: [120, 132, 101, 134, 90, 230, 210]
+                    data: []
                 },
                 {
                     name: '客户签约量',
                     type: 'line',
-                    stack: 'Total',
-                    data: [220, 182, 191, 234, 290, 330, 310]
+                    data: []
                 },
 
             ]

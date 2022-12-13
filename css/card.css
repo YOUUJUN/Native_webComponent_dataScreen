@@ -13,4 +13,5 @@
     transition: -webkit-transform .3s cubic-bezier(.34,2,.6,1),-webkit-box-shadow .2s ease;
     transition: transform .3s cubic-bezier(.34,2,.6,1),box-shadow .2s ease;
     transition: transform .3s cubic-bezier(.34,2,.6,1),box-shadow .2s ease,-webkit-transform .3s cubic-bezier(.34,2,.6,1),-webkit-box-shadow .2s ease;
+    overflow: hidden;
 }

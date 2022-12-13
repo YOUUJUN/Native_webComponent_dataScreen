@@ -8,10 +8,8 @@
     <META HTTP-EQUIV="pragma" CONTENT="no-cache">
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
     <META HTTP-EQUIV="expires" CONTENT="0">
-
-    <link rel="stylesheet" href="lib/layui/css/layui.css">
+    <link rel="stylesheet" href="libs/layui/css/layui.css">
     <link rel="stylesheet" href="css/card.css">
-    <link rel="stylesheet" href="css/states_card.css">
     <link rel="stylesheet" href="css/chart_card.css">
     <link rel="stylesheet" href="css/pie_card.css">
     <link rel="stylesheet" href="css/table_card.css">
@@ -30,102 +28,30 @@
 
         <main>
 
-            <section class="stats-card-wrap layui-row">
+            <section class="stats-card-wrap layui-row" id="states-card-wrap">
 
                 <div class="layui-col-xs6 layui-col-sm6 layui-col-md3">
-                    <section class="card stats-card">
-
-                        <div class="stats-card-top">
-
-                            <div class="stats-card-top-left">
-                                
-                                <span class="tag">试住</span>
-                                <span class="num">1598</span>
-                                <span class="label">老人总数</span>
-
-                            </div>
-
-                            <figure class="stats-card-top-right">
-                                <img src="">
-                            </figure>
-
-                        </div>
-
-                        <div class="stats-card-bottom">
-                            <span>当月新增</span>
-                            <span>58</span>
-                        </div>
-
-                    </section>
+                    <states-card tag="试住" label="老人总数" src="imgs/a1.png" data-id ='try'>
+                        <div slot="tag" class="tag" style="background-color: #3866FF;padding: .4rem 1.2rem;">试住</div>
+                    </states-card>
                 </div>
 
                 <div class="layui-col-xs6 layui-col-sm6 layui-col-md3">
-                    <section class="card stats-card">
-
-                        <div class="stats-card-top">
-
-                            <div class="stats-card-top-left">
-
-                            </div>
-
-                            <figure class="stats-card-top-right">
-                                <img src="">
-                            </figure>
-
-                        </div>
-
-                        <div class="stats-card-bottom">
-                            <span>当月新增</span>
-                            <span>58</span>
-                        </div>
-
-                    </section>
+                    <states-card tag="咨询" label="老人总数" src="imgs/a2.png" data-id ='consult'>
+                        <div slot="tag" style="background-color: #16DBCC;padding: .4rem 1.2rem;">咨询</div>
+                    </states-card>
                 </div>
 
                 <div class="layui-col-xs6 layui-col-sm6 layui-col-md3">
-                    <section class="card stats-card">
-
-                        <div class="stats-card-top">
-
-                            <div class="stats-card-top-left">
-
-                            </div>
-
-                            <figure class="stats-card-top-right">
-                                <img src="">
-                            </figure>
-
-                        </div>
-
-                        <div class="stats-card-bottom">
-                            <span>当月新增</span>
-                            <span>58</span>
-                        </div>
-
-                    </section>
+                    <states-card tag="转化率" label="入住转化" src="imgs/a3.png" data-id ='conversion'>
+                        <div slot="tag" style="background-color: #FFBB38;padding: .4rem 1.2rem;">转化率</div>
+                    </states-card>
                 </div>
 
                 <div class="layui-col-xs6 layui-col-sm6 layui-col-md3">
-                    <section class="card stats-card">
-
-                        <div class="stats-card-top">
-
-                            <div class="stats-card-top-left">
-
-                            </div>
-
-                            <figure class="stats-card-top-right">
-                                <img src="">
-                            </figure>
-
-                        </div>
-
-                        <div class="stats-card-bottom">
-                            <span>当月新增</span>
-                            <span>58</span>
-                        </div>
-
-                    </section>
+                    <states-card tag="入住率" label="床位占比" src="imgs/a4.png" data-id ='occupancy'>
+                        <div slot="tag" style="background-color: #CB45EB;padding: .4rem 1.2rem;">入住率</div>
+                    </states-card>
                 </div>
 
 
@@ -181,12 +107,11 @@
                         </div>
 
                         <div class="chart-card-bottom">
-                            <line-chart id="chart_elder_sign" style="display: inline-flex;width: 100%;"></line-chart>
+                            <line-chart id="chart_elder_sign" type="multiple" style="display: inline-flex;width: 100%;"></line-chart>
                         </div>
                     </section>
 
                 </div>
-
 
             </section>
 
@@ -195,14 +120,14 @@
                 <div class="layui-col-xs6 layui-col-sm6 layui-col-md3">
                     <section class="card pie-card">
                         <div class="pie-card-top">
-                            <h2 class="pie-card-top-left">转化率</h2>
+                            <h2 class="pie-card-top-left">咨询方式</h2>
                             <div class="pie-card-top-right">
 
                             </div>
                         </div>
 
                         <div class="pie-card-bottom">
-                            <pie-chart></pie-chart>
+                            <pie-chart type="pie" data-id="cons_mode_data"></pie-chart>
                         </div>
                     </section>
                 </div>
@@ -210,14 +135,14 @@
                 <div class="layui-col-xs6 layui-col-sm6 layui-col-md3">
                     <section class="card pie-card">
                         <div class="pie-card-top">
-                            <h2 class="pie-card-top-left">转化率</h2>
+                            <h2 class="pie-card-top-left">咨询对象</h2>
                             <div class="pie-card-top-right">
 
                             </div>
                         </div>
 
                         <div class="pie-card-bottom">
-
+                            <pie-chart type="pie" data-id="cons_object_data"></pie-chart>
                         </div>
                     </section>
                 </div>
@@ -225,14 +150,14 @@
                 <div class="layui-col-xs6 layui-col-sm6 layui-col-md3">
                     <section class="card pie-card">
                         <div class="pie-card-top">
-                            <h2 class="pie-card-top-left">转化率</h2>
+                            <h2 class="pie-card-top-left">入住方式</h2>
                             <div class="pie-card-top-right">
 
                             </div>
                         </div>
 
                         <div class="pie-card-bottom">
-
+                            <pie-chart type="pie" data-id="occ_mode_data"></pie-chart>
                         </div>
                     </section>
                 </div>
@@ -240,14 +165,74 @@
                 <div class="layui-col-xs6 layui-col-sm6 layui-col-md3">
                     <section class="card pie-card">
                         <div class="pie-card-top">
-                            <h2 class="pie-card-top-left">转化率</h2>
+                            <h2 class="pie-card-top-left">咨询房型</h2>
                             <div class="pie-card-top-right">
 
                             </div>
                         </div>
 
                         <div class="pie-card-bottom">
+                            <pie-chart type="pie" data-id="occ_room_data"></pie-chart>
+                        </div>
+                    </section>
+                </div>
 
+                <div class="layui-col-xs6 layui-col-sm6 layui-col-md3">
+                    <section class="card pie-card">
+                        <div class="pie-card-top">
+                            <h2 class="pie-card-top-left">支付主体</h2>
+                            <div class="pie-card-top-right">
+
+                            </div>
+                        </div>
+
+                        <div class="pie-card-bottom">
+                            <pie-chart type="pie" data-id="payer_data"></pie-chart>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="layui-col-xs6 layui-col-sm6 layui-col-md3">
+                    <section class="card pie-card">
+                        <div class="pie-card-top">
+                            <h2 class="pie-card-top-left">入住状态</h2>
+                            <div class="pie-card-top-right">
+
+                            </div>
+                        </div>
+
+                        <div class="pie-card-bottom">
+                            <pie-chart type="pie" data-id="occ_state_data"></pie-chart>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="layui-col-xs6 layui-col-sm6 layui-col-md3">
+                    <section class="card pie-card">
+                        <div class="pie-card-top">
+                            <h2 class="pie-card-top-left">子女情况</h2>
+                            <div class="pie-card-top-right">
+
+                            </div>
+                        </div>
+
+                        <div class="pie-card-bottom">
+                            <pie-chart type="pie" data-id="children_data"></pie-chart>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="layui-col-xs6 layui-col-sm6 layui-col-md3">
+                    <section class="card pie-card">
+                        <div class="pie-card-top">
+                            <h2 class="pie-card-top-left">老人来源</h2>
+                            <div class="pie-card-top-right">
+
+                            </div>
+                        </div>
+
+                        <div class="pie-card-bottom">
+                            <pie-chart type="pie" data-id="source_elder_data"></pie-chart>
                         </div>
                     </section>
                 </div>
@@ -261,19 +246,7 @@
                     <section class="card chart-card">
                         <div class="chart-card-top">
                             <h2 class="chart-card-top-left">了解途径</h2>
-                            <div class="chart-card-top-right layui-form">
-                                <input type="checkbox" lay-skin="switch" lay-filter="time_know_pathway" lay-text="按月|按年" checked>
-                                <div class="time-wrap" id="time_know_pathway_month">
-                                    <input type="text" autocomplete="off" class="layui-input startTime" placeholder="开始日期">
-                                    <span style="margin:0 .5rem">至</span>
-                                    <input type="text" autocomplete="off" class="layui-input endTime" placeholder="结束日期">
-                                </div>
-                                <div class="time-wrap hide" id="time_know_pathway_year">
-                                    <input type="text" autocomplete="off" class="layui-input startTime" placeholder="开始日期">
-                                    <span style="margin:0 .5rem">至</span>
-                                    <input type="text" autocomplete="off" class="layui-input endTime" placeholder="结束日期">
-                                </div>
-                            </div>
+                            <div class="chart-card-top-right"></div>
                         </div>
 
                         <div class="chart-card-bottom">
@@ -348,8 +321,18 @@
                     <section class="card chart-card">
                         <div class="chart-card-top">
                             <h2 class="chart-card-top-left">来访/回访</h2>
-                            <div class="chart-card-top-right">
-
+                            <div class="chart-card-top-right layui-form">
+                                <input type="checkbox" lay-skin="switch" lay-filter="time_visit" lay-text="按月|按年" checked>
+                                <div class="time-wrap" id="time_visit_month">
+                                    <input type="text" autocomplete="off" class="layui-input startTime" placeholder="开始日期">
+                                    <span style="margin:0 .5rem">至</span>
+                                    <input type="text" autocomplete="off" class="layui-input endTime" placeholder="结束日期">
+                                </div>
+                                <div class="time-wrap hide" id="time_visit_year">
+                                    <input type="text" autocomplete="off" class="layui-input startTime" placeholder="开始日期">
+                                    <span style="margin:0 .5rem">至</span>
+                                    <input type="text" autocomplete="off" class="layui-input endTime" placeholder="结束日期">
+                                </div>
                             </div>
                         </div>
 
@@ -376,7 +359,6 @@
 
             </section>
 
-
             <section class="table-card-wrap layui-row">
 
                 <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
@@ -400,7 +382,6 @@
 
             </section>
 
-
         </main>
 
         <footer>
@@ -410,10 +391,15 @@
 
     </article>
 
+    <script>
+        // const publicPath = '/fm_crm/static/templates/institution/zh_CN/'
+        const publicPath = ''
+    </script>
 
-    <script src="lib/layui/layui.js"></script>
-    <script src="lib/axios.min.js"></script>
-    <script src="lib/echarts.min.js"></script>
+    <script src="libs/layui/layui.js"></script>
+    <script src="libs/axios.min.js"></script>
+    <script src="libs/echarts.min.js"></script>
+    <script src="js/http.js" type="module"></script>
     <script src="js/utils.js"></script>
     <script src="https://api.map.baidu.com/api?v=3.0&ak=ph1UtdQV0g7i4lOaq5qsZd2cEpOGbH8g"></script>
 
@@ -424,60 +410,19 @@
     <script src="components/funnel_chart.js"></script>
     <script src="components/map_card.js"></script>
 
+    <script src="components/states_card.js"></script>
+
     <script src="js/time_range_search.js"></script>
     <script src="js/table_render.js"></script>
 
     <script>
         this.flexible()
-
-        //渲染转化率折线图
-        const draw_chart_conversion_rate = (startTime, endTime) => {
-            const chart = document.getElementById('chart_conversion_rate')
-            console.log('chart', chart.chart)
-            chart.drawSimpleLine()
-        }
-        draw_chart_conversion_rate();
-
-        //渲染老人签约量/客户咨询量 折线图
-        const draw_chart_elder_sign = (startTime, endTime) => {
-            const chart = document.getElementById('chart_elder_sign')
-            console.log('chart', chart.chart)
-            chart.drawMultipleLine()
-        }
-        draw_chart_elder_sign()
-
-
-        genTimeRange('time_conversion_rate_month', 'month', () => {
-            draw_chart_conversion_rate()
-        })
-        genTimeRange('time_conversion_rate_year', 'year', () => {
-
-        })
-
-        genTimeRange('time_elder_sign_month', 'month', () => {
-            draw_chart_elder_sign()
-        })
-        genTimeRange('time_elder_sign_year', 'year', () => {
-
-        })
-
-        layui.use('form', () =>{
-            const form = layui.form;
-
-            form.on('switch(time_conversion_rate)', function(data){
-                if(data.elem.checked){
-                    document.getElementById('time_conversion_rate_month').classList.remove('hide')
-                    document.getElementById('time_conversion_rate_year').classList.add('hide')
-                }else{
-                    document.getElementById('time_conversion_rate_month').classList.add('hide')
-                    document.getElementById('time_conversion_rate_year').classList.remove('hide')
-                }
-            });
-
-        });
-
     </script>
 
+    <!--异步渲染-->
+    <script src="js/states_render.js" type="module"></script>
+    <script src="js/line_cart_render.js" type="module"></script>
+    <script src="js/pie_chart_render.js" type="module"></script>
 
 </body>
 </html>

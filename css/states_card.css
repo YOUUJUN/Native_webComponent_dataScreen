@@ -1,11 +1,8 @@
-.stats-card-wrap{
-    margin-bottom: 2.4rem;
-}
-
-.stats-card{
+.stats-card {
     display: flex;
     flex-direction: column;
-    padding: 1.5rem 2.3rem;
+    padding: 3.2rem 2.3rem 1.6rem;
+    border-radius: .5rem;
 }
 
 .stats-card-top{
@@ -13,7 +10,7 @@
     justify-content: space-between;
     padding-bottom: 1.4rem;
     margin-bottom: 1rem;
-    border-bottom: .1rem solid #aaaaaa;
+    border-bottom: .1rem solid #E7F0F7;
 }
 
 .stats-card-top-left{
@@ -27,6 +24,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin:0;
+}
+
+.stats-card-top-right img{
+    width:7.5rem;
+    height:7.5rem;
 }
 
 .stats-card-bottom{
@@ -36,22 +39,34 @@
 
 /*---tag---*/
 .tag {
-    background: #7f7f7f;
+    position: absolute;
+    left: 0;
+    top: 0;
+    /*background: #7f7f7f;*/
     font-size: 1.4rem;
     color: #fff;
-    padding: .4rem 1.2rem;
-    border-radius: .4rem;
+    /*padding: .4rem 1.2rem;*/
 }
 
 .stats-card-top-left > .num{
-    font-size: 2.5rem;
+    font-family: Source Han Sans CN-Bold;
+    font-size: 3.2rem;
     font-weight: bold;
     margin: .5rem 0;
 }
 
 .stats-card-top-left > .label{
-    color:#31b7f2;
+    color:#718FBF;
     font-size: 1.3rem;
 }
 
+.stats-card-bottom span:first-child{
+    font-size: 1.4rem;
+    color: #96A0B5;
+}
+
+.stats-card-bottom span:last-child{
+    font-size: 1.6rem;
+    color: #CF3E5C;
+}
 

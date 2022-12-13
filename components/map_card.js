@@ -1,6 +1,7 @@
-class MapCard extends HTMLElement{
+class MapCard extends HTMLElement {
     shell = null
     map = null
+
     constructor() {
         super();
         this.shell = this.render()
@@ -8,9 +9,10 @@ class MapCard extends HTMLElement{
         this.setupShadow(this.shell, style)
 
         this.map = this.drawMap()
+        this.pointElders()
     }
 
-    render(){
+    render() {
         const shell = document.createElement('div')
         shell.setAttribute('class', 'map-wrap')
         const map = document.createElement('div')
@@ -24,7 +26,7 @@ class MapCard extends HTMLElement{
         button.addEventListener('click', () => {
             this.searchElder()
         })
-        button.innerText="搜索"
+        button.innerText = "搜索"
         searchWrap.appendChild(input)
         searchWrap.appendChild(button)
 
@@ -34,24 +36,45 @@ class MapCard extends HTMLElement{
         return shell
     }
 
-    drawMap(){
-        const map = new BMap.Map(this.shell.querySelector('#map'));  // 创建Map实例
-        map.centerAndZoom("合肥",15);      // 初始化地图,用
+    drawMap(options) {
+        const map = new BMap.Map(this.shell.querySelector('#map'), {enableMapClick: false})
+        // map.centerAndZoom("合肥",15)
+        map.enableScrollWheelZoom()
 
         return map
     }
 
-    searchElder(){
+    pointInstitution() {
+        let point = new BMap.Point(116.404, 39.915);
+        this.map.centerAndZoom(point, 15);
+        let icon = new BMap.Icon('imgs/institution.png', new BMap.Size(50, 50))
+        let marker = new BMap.Marker(point, {
+            icon: icon
+        });  // 创建标注
+        this.map.addOverlay(marker);
+    }
+
+    pointElders() {
+        let point = new BMap.Point(110.404, 39.915);
+        this.map.centerAndZoom(point, 15);
+        let icon = new BMap.Icon('imgs/elder.png', new BMap.Size(50, 50))
+        let marker = new BMap.Marker(point, {
+            icon: icon
+        });  // 创建标注
+        this.map.addOverlay(marker);
+    }
+
+    searchElder() {
 
     }
 
-    setupShadow(shell, style){
-        const shadow = this.attachShadow({mode : 'open'})
+    setupShadow(shell, style) {
+        const shadow = this.attachShadow({mode: 'open'})
         shadow.appendChild(style)
         shadow.appendChild(shell)
     }
 
-    css(){
+    css() {
         const style = document.createElement('style')
 
         style.textContent = `
