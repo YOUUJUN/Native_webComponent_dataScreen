@@ -80,6 +80,7 @@ class LineChart extends HTMLElement{
 
     setLineData(startTime, endTime, data, rangeType){
         let xAxisData = genDateRange(startTime, endTime, rangeType)
+        const legendData = Object.keys(data)
         const series =  Object.entries(data).map(item => {
             console.log('item', item)
             return {
@@ -92,6 +93,10 @@ class LineChart extends HTMLElement{
         console.log('series', series)
 
         this.chart.setOption({
+            legend: {
+                show : legendData.length > 1,
+                data : legendData
+            },
             xAxis: {
                 type: 'category',
                 data: xAxisData
@@ -119,7 +124,7 @@ class LineChart extends HTMLElement{
             legend: {
                 left: 'left',
                 top: '4%',
-                data: ['客户咨询量', '客户签约量'],
+                data: [],
                 orient : 'vertical',
             },
             grid: {
@@ -139,12 +144,12 @@ class LineChart extends HTMLElement{
             },
             series: [
                 {
-                    name: '客户咨询量',
+                    name: '',
                     type: 'line',
                     data: []
                 },
                 {
-                    name: '客户签约量',
+                    name: '',
                     type: 'line',
                     data: []
                 },

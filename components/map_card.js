@@ -1,6 +1,8 @@
 class MapCard extends HTMLElement {
     shell = null
     map = null
+    searchName = ''
+    ElderData = []
 
     constructor() {
         super();
@@ -9,7 +11,6 @@ class MapCard extends HTMLElement {
         this.setupShadow(this.shell, style)
 
         this.map = this.drawMap()
-        this.pointElders()
     }
 
     render() {
@@ -23,8 +24,11 @@ class MapCard extends HTMLElement {
         searchWrap.classList.add('search')
         const input = document.createElement('input')
         const button = document.createElement('button')
+        input.addEventListener('change', (ev) => {
+            this.searchName = ev.target.value;
+        })
         button.addEventListener('click', () => {
-            this.searchElder()
+            this.searchElder(this.searchName)
         })
         button.innerText = "搜索"
         searchWrap.appendChild(input)
@@ -44,28 +48,95 @@ class MapCard extends HTMLElement {
         return map
     }
 
-    pointInstitution() {
-        let point = new BMap.Point(116.404, 39.915);
+    pointInstitution(data) {
+        const {name, coords} = data
+        let point = new BMap.Point(coords[0], coords[1]);
         this.map.centerAndZoom(point, 15);
         let icon = new BMap.Icon('imgs/institution.png', new BMap.Size(50, 50))
         let marker = new BMap.Marker(point, {
             icon: icon
         });  // 创建标注
+        let infoWindow = new BMap.InfoWindow(`
+                <div>
+                    <p><span>名称: </span><span>${name}</span></p>
+                </div>
+            `, {
+            width: 200,
+            title: '',
+        })
+
+        marker.addEventListener('click', () => {
+            this.map.openInfoWindow(infoWindow, point) // 开启信息窗口
+            this.shell.querySelector('.BMap_pop').style.height = '86px'
+        })
+
         this.map.addOverlay(marker);
+
+
     }
 
-    pointElders() {
-        let point = new BMap.Point(110.404, 39.915);
-        this.map.centerAndZoom(point, 15);
+    pointElders(data) {
+
+        // const data = {
+        //     elders : [
+        //         {
+        //             name : '',
+        //             coords: [1,2],
+        //             ...
+        //         }
+        //     ],
+        //
+        //     institution : {
+        //         name : '',
+        //         coords: [1, 2],
+        //         ...
+        //     }
+        // }
+
+        this.ElderData = data
+
         let icon = new BMap.Icon('imgs/elder.png', new BMap.Size(50, 50))
-        let marker = new BMap.Marker(point, {
-            icon: icon
-        });  // 创建标注
-        this.map.addOverlay(marker);
+        data.forEach(item => {
+            let point = new BMap.Point(item.coords[0], item.coords[1])
+            let marker = new BMap.Marker(point, {
+                icon: icon
+            });  // 创建标注
+            let infoWindow = new BMap.InfoWindow(`
+                <div>
+                    <p><span>姓名: </span><span>${item.name}</span></p>
+                    <p><span>年龄:</span><span>${item.age}</span></p>
+                    <p><span>入住房型:</span><span>${item.room_type}</span></p>
+                    <p><span>护理类型:</span><span>${item.nursing_type}</span></p>
+                </div>
+            `, {
+                width: 200,
+                title: '',
+            })
+
+            this.map.addOverlay(marker);
+            marker.addEventListener('click', () => {
+                this.map.openInfoWindow(infoWindow, point) // 开启信息窗口
+                this.shell.querySelector('.BMap_pop').style.height = '177px'
+            })
+        })
+
     }
 
-    searchElder() {
+    searchElder(name) {
+        console.log('name', name)
+        let theMan = this.ElderData.find(item => {
+            if(item.name === name.trim()){
+                return item;
+            }
+        })
 
+        if(!theMan){
+            window.alert('未找到搜索老人')
+            return
+        }
+
+        let point = new BMap.Point(theMan.coords[0], theMan.coords[1])
+        this.map.centerAndZoom(point, 15);
     }
 
     setupShadow(shell, style) {
@@ -113,6 +184,18 @@ class MapCard extends HTMLElement {
                 color: #fff;
                 border: 1px solid transparent;
                 padding: 0 18px;
+            }
+            
+            .BMap_pop{
+                width: 252px;
+                height: 177px;
+                background: rgb(255, 255, 255);
+                border: 1px solid #ababab;
+                position: relative;
+            }
+            
+            .BMap_pop div{
+                border:none !important
             }
         `
         return style

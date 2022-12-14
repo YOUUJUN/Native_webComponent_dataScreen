@@ -42,7 +42,8 @@ class PieChart extends HTMLElement{
             tooltip: {
                 trigger: 'item',
                 formatter: (params) =>{
-                    let tips = `${params.name}<br />${params.marker} 占比：${params.percent}%<br />${params.marker} 数量：${params.value}`
+                    console.log('params?.percent', params?.percent)
+                    let tips = `${params.name}<br />${params.marker} 占比：${params?.percent || 0}%<br />${params.marker} 数量：${params.value}`
                     return tips
 
                 }
@@ -92,7 +93,7 @@ class PieChart extends HTMLElement{
             tooltip: {
                 trigger: 'item',
                 formatter: (params) =>{
-                    let tips = `${params.name}<br />${params.marker} 占比：${params.percent}%<br />${params.marker} 数量：${params.value}`
+                    let tips = `${params.name}<br />${params.marker} 占比：${params?.percent || 0}%<br />${params.marker} 数量：${params.value}`
                     return tips
 
                 }

@@ -78,17 +78,27 @@ class FunnelChart extends HTMLElement{
                         }
                     },
                     data: [
-                        { value: 60, name: 'Visit' },
-                        { value: 40, name: 'Inquiry' },
-                        { value: 20, name: 'Order' },
-                        { value: 80, name: 'Click' },
-                        { value: 100, name: 'Show' }
+                        { value: 10, name: '' },
+                        { value: 20, name: '' },
+                        { value: 30, name: '' },
+                        { value: 40, name: '' },
+                        { value: 50, name: '' }
                     ]
                 }
             ]
         };
 
         this.setupChart(this.shell, option)
+    }
+
+    setData(data){
+        this.chart.setOption({
+            series : [
+                {
+                    data,
+                }
+            ]
+        })
     }
 
 

@@ -15,7 +15,7 @@ const draw_chart_conversion_rate = (startTime, endTime, rangeType) => {
     }).then(res => {
         const {success, data} = res.data
         const payload = {
-            'name' : data
+            '转化率' : data
         }
         if(success){
             chart.setLineData(startTime, endTime, payload, rangeType)
@@ -42,6 +42,31 @@ const draw_chart_elder_sign = (startTime, endTime, rangeType) => {
             const payload = {
                 '客户咨询量' : data.consulting_volume,
                 '客户签约量' : data.signed_quantity
+            }
+            chart.setLineData(startTime, endTime, payload, rangeType)
+        }
+    })
+}
+
+//渲染来访回访数据折线图
+const draw_chart_visit = (startTime, endTime, rangeType) => {
+    const chart = document.getElementById('chart_visit')
+
+    Request({
+        method: 'post',
+        url : '/crm/visit/data/api',
+        data : {
+            select : rangeType,
+            date_start : startTime,
+            date_end : endTime
+        }
+    }).then(res => {
+        const {success, data} = res.data
+        console.log('data', data)
+        if(success){
+            const payload = {
+                '来访' : data.visit_volume,
+                '回访' : data.ret_visit_volume
             }
             chart.setLineData(startTime, endTime, payload, rangeType)
         }
@@ -75,8 +100,11 @@ const timeComponents = [
         name : 'time_visit',
         month : 'time_visit_month',
         year : 'time_visit_year',
-        callback : (...params) => {},
-        init : () => {}
+        callback : (...params) => draw_chart_visit.apply(this, params),
+        init : () => {
+            const date = new Date()
+            draw_chart_visit(`${date.getFullYear()}-01`, `${date.getFullYear()}-12`, 'month')
+        }
     }
 ]
 

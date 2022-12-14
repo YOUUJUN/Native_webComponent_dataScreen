@@ -1,4 +1,4 @@
-const baseURL = 'http://192.168.8.115:8080';
+export const baseURL = 'http://192.168.8.123:8080';
 
 /**
  * 创建axios实例
